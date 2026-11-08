@@ -3,141 +3,659 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dorlin Stephen-Odogu — Aspiring DevOps Engineer and Product Designer">
-  <title>Dorlin Stephen-Odogu | Portfolio</title>
+  <meta name="theme-color" content="#080b14">
+  <meta name="description" content="Dorlin Stephen-Odogu — Aspiring DevOps Engineer exploring cloud infrastructure, automation, Linux and modern software delivery.">
+  <title>Dorlin Stephen-Odogu | DevOps & Cloud Engineering</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+
+<!-- FINAL MOBILE LAYOUT FIX -->
+<style>
+/* Keep the desktop design; correct tablet and phone layouts */
+@media screen and (max-width: 900px) {
+  *, *::before, *::after {
+    box-sizing: border-box !important;
+  }
+
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  body, main, header, footer, section, article, div {
+    min-width: 0 !important;
+  }
+
+  img, svg, video {
+    max-width: 100% !important;
+  }
+
+  p, li {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+    word-break: normal !important;
+  }
+
+  /* Every main section fits inside the screen */
+  main > section,
+  .section-wrap,
+  .content-section {
+    width: calc(100% - 36px) !important;
+    max-width: calc(100% - 36px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Hero: one column, no overflowing text or buttons */
+  #home.hero {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: calc(100% - 36px) !important;
+    max-width: calc(100% - 36px) !important;
+    gap: 32px !important;
+  }
+
+  #home .hero-copy,
+  #home .hero-description,
+  #home .hero-visual {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  #home .hero-description,
+  #about .about-copy p,
+  #expertise p,
+  #projects p,
+  #journey p,
+  #contact p,
+  .project-details p,
+  .skill-card p,
+  .principle p {
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+  }
+
+  #home .hero h1 {
+    font-size: clamp(38px, 10vw, 58px) !important;
+    letter-spacing: -2px !important;
+    line-height: 1.12 !important;
+  }
+
+  #home .hero-actions {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+
+  #home .hero-actions .btn {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #home .hero-visual {
+    overflow: hidden !important;
+  }
+
+  #home .visual-topline {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  /* Cards and grids must shrink to the available screen width */
+  .about-layout,
+  .journey-layout,
+  .skill-grid,
+  .project-list,
+  .project-card,
+  .timeline,
+  .principles {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .project-card {
+    overflow: hidden !important;
+  }
+
+  .project-details {
+    width: 100% !important;
+    min-width: 0 !important;
+    padding: 24px 20px !important;
+  }
+
+  /* Exact deployment section and card */
+  #devops-deployment-project {
+    display: block !important;
+    width: calc(100% - 36px) !important;
+    max-width: calc(100% - 36px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #devops-deployment-project .devops-feature-card {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 26px 22px !important;
+    overflow: hidden !important;
+  }
+
+  #devops-deployment-project .project-card-content {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #devops-deployment-project h3 {
+    font-size: 25px !important;
+    line-height: 1.3 !important;
+    margin: 0 0 16px !important;
+  }
+
+  #devops-deployment-project p {
+    font-size: 16px !important;
+    line-height: 1.75 !important;
+    margin: 0 0 16px !important;
+  }
+
+  #devops-deployment-project .devops-stack {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  #devops-deployment-project .devops-stack span {
+    font-size: 11px !important;
+    white-space: normal !important;
+  }
+
+  .section-heading {
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+  }
+
+  .section-index, .section-note {
+    font-size: 10px !important;
+    line-height: 1.6 !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #devops-deployment-project .devops-feature-card {
+    padding: 22px 18px !important;
+  }
+
+  #home .hero h1 {
+    font-size: 39px !important;
+  }
+}
+</style>
+<!-- END FINAL MOBILE LAYOUT FIX -->
+
 </head>
 <body>
-  <header>
-    <a class="logo" href="#home">DORLIN<span>.</span></a>
-    <nav>
+
+  <div class="page-glow glow-one"></div>
+  <div class="page-glow glow-two"></div>
+
+  <header class="site-header">
+    <a class="logo" href="#home" aria-label="Dorlin home">D<span>.</span></a>
+
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav">
       <a href="#about">About</a>
-      <a href="#skills">Skills</a>
+      <a href="#expertise">Expertise</a>
       <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
+      <a href="#journey">Journey</a>
+      <a class="nav-contact" href="#contact">Let's talk <span>↗</span></a>
     </nav>
   </header>
 
   <main>
-    <section class="hero" id="home">
-      <p class="eyebrow">ASPIRING DEVOPS ENGINEER · PRODUCT DESIGNER</p>
-      <h1>Hello, I'm<br><span>Dorlin Stephen-Odogu.</span></h1>
-      <p class="intro">
-        I'm building my career in DevOps, cloud computing and automation,
-        combining my product design background with practical technical skills.
-      </p>
-      <div class="actions">
-        <a class="button" href="#projects">Explore my projects ↗</a>
-        <a class="button secondary" href="mailto:dorlilmckenzie@gmail.com?subject=CV%20Request">Request my CV ↗</a>
+
+    <!-- HERO -->
+    <section class="hero section-wrap" id="home">
+      <div class="hero-copy">
+        <div class="availability">
+          <span class="status-dot"></span>
+          ASPIRING DEVOPS ENGINEER
+        </div>
+
+        <p class="hero-identity">DORLIN STEPHEN-ODOGU <span>·</span> ASPIRING DEVOPS ENGINEER</p>
+          <p class="hero-pretitle">HELLO, I'M DORLIN STEPHEN-ODOGU</p>
+
+        <h1>
+          Building better<br>
+          systems. <span class="highlight">One</span><br>
+          deployment at<br>
+          a time<span class="lime-dot">.</span>
+        </h1>
+
+        <p class="hero-description">
+          Exploring the world of cloud infrastructure, automation and reliable
+          software delivery. Bringing a product designer's eye for detail
+          to the engineering journey.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">Explore my work <span>↗</span></a>
+          <a href="mailto:dorlilmckenzie@gmail.com?subject=CV%20Request" class="btn btn-outline">Request my CV</a>
+        </div>
+
+        <div class="hero-meta">
+          <span><span class="meta-icon">⌖</span> NIGERIA</span>
+          <span class="meta-divider"></span>
+          <span>LEARNING BY BUILDING</span>
+        </div>
       </div>
-      <p class="location">BASED IN NIGERIA · LEARNING BY BUILDING</p>
-    </section>
 
-    <section id="about">
-      <p class="section-label">01 / ABOUT ME</p>
-      <h2>Curious by nature.<br><span>Driven to build.</span></h2>
-      <p>
-        I am a product and UI/UX designer expanding into DevOps engineering.
-        My experience in digital product design has helped me understand how
-        people interact with technology and why reliable systems matter.
-      </p>
-      <p>
-        I am developing practical skills in Linux, Bash, Git, Docker, AWS
-        and CI/CD through hands-on projects and continuous learning.
-      </p>
-    </section>
+      <div class="hero-visual">
+        <div class="visual-topline">
+          <span>ENGINEERING / 001</span>
+          <span>BUILDING IN PUBLIC</span>
+        </div>
 
-    <section id="skills">
-      <p class="section-label">02 / MY TOOLKIT</p>
-      <h2>Skills and technologies</h2>
-      <div class="grid">
-        <article><h3>Systems & Scripting</h3><p>Linux · Bash · Shell scripting · Server monitoring</p></article>
-        <article><h3>Cloud & Infrastructure</h3><p>AWS EC2 · VPC · S3 · IAM · CloudWatch · KMS fundamentals</p></article>
-        <article><h3>Containers & Delivery</h3><p>Docker · Git · GitHub · GitHub Actions · CI/CD fundamentals</p></article>
-        <article><h3>Product & Design</h3><p>Figma · UI/UX · Prototyping · User flows · HTML · CSS</p></article>
-      </div>
-    </section>
+        <div class="orbit-scene">
+          <div class="orbit orbit-outer"></div>
+          <div class="orbit orbit-inner"></div>
+          <div class="orbit orbit-small"></div>
 
-    <section id="projects">
-      <p class="section-label">03 / SELECTED WORK</p>
-      <h2>Projects I've worked on</h2>
-      <div class="projects">
-        <article class="project">
-          <p class="project-number">PROJECT 01 · LINUX & BASH</p>
-          <h3>Node Health Monitoring</h3>
-          <p>
-            Built a Bash script to inspect Linux server health, including disk,
-            memory, CPU, uptime, running processes and selected services.
-            Added checks to help identify potential server issues.
-          </p>
-          <p class="tools">TOOLS: Linux · Bash · curl · awk</p>
-          <a href="https://github.com/dorlilmckenzie/devops-node-health-monitoring" target="_blank" rel="noopener">View GitHub repository ↗</a>
-        </article>
+          <div class="orbit-node node-one">AWS</div>
+          <div class="orbit-node node-two">GIT</div>
+          <div class="orbit-node node-three">CLI</div>
+          <div class="orbit-node node-four">DOCKER</div>
 
-        <article class="project">
-          <p class="project-number">PROJECT 02 · AWS FUNDAMENTALS</p>
-          <h3>AWS Services Architecture</h3>
-          <p>
-            Completed an architecture exercise mapping application requirements
-            to AWS services for compute, networking, storage, access control,
-            monitoring, encryption and CI/CD.
-          </p>
-          <p class="tools">TOOLS: EC2 · VPC · S3 · IAM · CloudWatch · KMS</p>
-          <p class="note">This was an architecture exercise, not a live production deployment.</p>
-        </article>
+          <div class="core">
+            <div class="core-symbol">D<span>.</span></div>
+            <span>ENGINEERING</span>
+          </div>
+        </div>
 
-        <article class="project">
-          <p class="project-number">PROJECT 03 · CLOUD DEPLOYMENT</p>
-          <h3>Luna — Period Tracking Application</h3>
-          <p>
-            Deployed my period-tracking application to an AWS EC2 environment.
-            My role focused on application deployment and gaining practical
-            experience with cloud hosting.
-          </p>
-          <p class="tools">TOOLS: AWS EC2 · GitHub · Docker</p>
-          <a href="https://github.com/dorlilmckenzie/luna-front-end" target="_blank" rel="noopener">View project repository ↗</a>
-        </article>
+        <div class="visual-terminal">
+          <div class="terminal-heading">
+            <div class="terminal-dots"><i></i><i></i><i></i></div>
+            <span>dorlin@devops ~</span>
+            <span class="terminal-live">● LIVE</span>
+          </div>
+          <div class="terminal-body">
+            <p><span class="terminal-green">$</span> whoami</p>
+            <p class="terminal-output">Aspiring DevOps Engineer</p>
+            <p><span class="terminal-green">$</span> current_focus</p>
+            <p class="terminal-output">Cloud · Automation · CI/CD</p>
+            <p><span class="terminal-green">$</span> <span class="cursor"></span></p>
+          </div>
+        </div>
+
+        <div class="visual-caption">CURIOUS MIND. PRACTICAL APPROACH.</div>
       </div>
     </section>
 
-    <section id="journey">
-      <p class="section-label">04 / MY JOURNEY</p>
-      <h2>Education and experience</h2>
-      <div class="timeline">
-        <article>
-          <h3>B.Sc. Biochemistry</h3>
-          <p>Rivers State University · 2022</p>
-        </article>
-        <article>
-          <h3>Product & UI/UX Design</h3>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>LINUX</span><b>✳</b><span>AWS</span><b>✳</b>
+        <span>DOCKER</span><b>✳</b><span>BASH</span><b>✳</b>
+        <span>GITHUB</span><b>✳</b><span>CI/CD</span><b>✳</b>
+        <span>LINUX</span><b>✳</b><span>AWS</span><b>✳</b>
+        <span>DOCKER</span><b>✳</b><span>BASH</span><b>✳</b>
+        <span>GITHUB</span><b>✳</b><span>CI/CD</span><b>✳</b>
+      </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="content-section section-wrap" id="about">
+      <div class="section-heading">
+        <span class="section-index">01 / THE PERSON</span>
+        <span class="section-line"></span>
+        <span class="section-note">A LITTLE ABOUT ME</span>
+      </div>
+
+      <div class="about-layout">
+        <div>
+          <p class="mini-label">BEYOND THE TERMINAL</p>
+          <h2>Technology is more<br>than code. It's about<br><span class="text-accent">what we build.</span></h2>
+        </div>
+
+        <div class="about-copy">
+      <div class="profile-photo-frame">
+        <img src="assets/profile.jpg" alt="Portrait of Dorlin Stephen-Odogu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="profile-photo-fallback"><strong>DS</strong><span>PROFILE PHOTO</span></div>
+      </div>
+      
           <p>
-            Worked on digital product experiences, user flows, dashboards,
-            prototypes and design handoff, including logistics and software workflows.
+            I'm Dorlin, a product and UI/UX designer expanding my career
+            into DevOps engineering. My background in digital products has
+            taught me to think about how technology works for people,
+            not just how it looks on a screen.
           </p>
-        </article>
-        <article>
-          <h3>DevOps Learning Journey</h3>
           <p>
-            Building practical foundations in Linux, Bash, Git, Docker,
-            AWS and CI/CD through hands-on projects.
+            I'm building hands-on experience with Linux, Bash, Git,
+            Docker, AWS and CI/CD. I enjoy learning by solving practical
+            problems, experimenting with tools and understanding the
+            systems behind modern applications.
           </p>
+          <a class="text-link" href="#journey">Explore my journey <span>↗</span></a>
+        </div>
+      </div>
+
+      <div class="principles">
+        <article class="principle">
+          <span class="principle-number">01</span>
+          <h3>Stay curious.</h3>
+          <p>Keep exploring, questioning and learning new technologies.</p>
+        </article>
+        <article class="principle">
+          <span class="principle-number">02</span>
+          <h3>Build practically.</h3>
+          <p>Turn knowledge into working projects and real experience.</p>
+        </article>
+        <article class="principle">
+          <span class="principle-number">03</span>
+          <h3>Think differently.</h3>
+          <p>Combine design thinking with an engineering mindset.</p>
         </article>
       </div>
     </section>
 
-    <section id="contact">
-      <p class="section-label">05 / CONTACT</p>
-      <h2>Let's connect.</h2>
-      <p>I'm open to connecting with teams, mentors and people working across DevOps, cloud and product design.</p>
-      <a class="email" href="mailto:dorlilmckenzie@gmail.com">dorlilmckenzie@gmail.com ↗</a>
-      <p class="social">
-        <a href="https://github.com/dorlilmckenzie" target="_blank" rel="noopener">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/dorlin-stephen-odogu/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      </p>
+    <!-- EXPERTISE -->
+    <section class="content-section section-wrap" id="expertise">
+      <div class="section-heading">
+        <span class="section-index">02 / THE TOOLKIT</span>
+        <span class="section-line"></span>
+        <span class="section-note">TECHNOLOGIES & SKILLS</span>
+      </div>
+
+      <div class="expertise-intro">
+        <h2>Tools I'm learning<br>to <span class="text-accent">build with.</span></h2>
+        <p>
+          Developing a practical foundation across infrastructure,
+          cloud services, scripting and software delivery.
+        </p>
+      </div>
+
+      <div class="skill-grid">
+        <article class="skill-card skill-featured">
+          <div class="skill-card-top"><span>01</span><span class="skill-symbol">⌘</span></div>
+          <h3>Systems & Scripting</h3>
+          <p>Working with Linux environments, command-line tools and Bash automation.</p>
+          <div class="skill-tags">
+            <span>Linux</span><span>Bash</span><span>Shell scripting</span><span>SSH</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card-top"><span>02</span><span class="skill-symbol">☁</span></div>
+          <h3>Cloud & Infrastructure</h3>
+          <p>Learning how cloud infrastructure, networking and access control work together.</p>
+          <div class="skill-tags">
+            <span>AWS EC2</span><span>VPC</span><span>S3</span><span>IAM</span><span>CloudWatch</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card-top"><span>03</span><span class="skill-symbol">▣</span></div>
+          <h3>Containers & Delivery</h3>
+          <p>Building container workflows and understanding continuous integration and delivery.</p>
+          <div class="skill-tags">
+            <span>Docker</span><span>Git</span><span>GitHub</span><span>GitHub Actions</span>
+          </div>
+        </article>
+
+        <article class="skill-card">
+          <div class="skill-card-top"><span>04</span><span class="skill-symbol">✳</span></div>
+          <h3>Product & Design</h3>
+          <p>Bringing user-centred thinking and visual problem-solving into technical work.</p>
+          <div class="skill-tags">
+            <span>Figma</span><span>UI/UX</span><span>HTML</span><span>CSS</span><span>Prototyping</span>
+          </div>
+        </article>
+      </div>
+
+      <p class="skill-disclaimer">A growing toolkit — skills are at different stages of practical experience.</p>
     </section>
+
+    <!-- PROJECTS -->
+    <section class="content-section section-wrap" id="projects">
+      <div class="section-heading">
+        <span class="section-index">03 / SELECTED WORK</span>
+        <span class="section-line"></span>
+        <span class="section-note">LEARNING THROUGH BUILDING</span>
+      </div>
+
+      <div class="projects-intro">
+        <h2>Ideas into<br><span class="text-accent">working projects.</span></h2>
+        <p>Every project is an opportunity to experiment, learn and get better.</p>
+      </div>
+
+      <div class="project-list">
+
+        <article class="project-card project-one">
+          <div class="project-art art-monitor">
+            <div class="art-window">
+              <div class="art-window-bar"><span></span><span></span><span></span><small>SERVER MONITOR</small></div>
+              <div class="monitor-content">
+                <div class="monitor-title">SYSTEM HEALTH <span>● ACTIVE</span></div>
+                <div class="monitor-stats">
+                  <div><small>CPU</small><strong>24<span>%</span></strong><div class="mini-bar"><i style="width:24%"></i></div></div>
+                  <div><small>MEMORY</small><strong>62<span>%</span></strong><div class="mini-bar"><i style="width:62%"></i></div></div>
+                  <div><small>DISK</small><strong>48<span>%</span></strong><div class="mini-bar"><i style="width:48%"></i></div></div>
+                </div>
+                <div class="monitor-log"><span>$</span> ./devops-health-check.sh<br><span class="log-success">✓ Health check completed</span><br><span class="log-muted">All checks processed.</span></div>
+              </div>
+            </div>
+            <span class="art-decoration">01</span>
+          </div>
+          <div class="project-details">
+            <div class="project-meta"><span>LINUX & AUTOMATION</span><span>PROJECT 01</span></div>
+            <h3>Node Health<br>Monitoring</h3>
+            <p>
+              A Bash-based server health monitoring tool that checks
+              important system resources and services, helping identify
+              potential issues on Linux machines.
+            </p>
+            <div class="project-stack"><span>Linux</span><span>Bash</span><span>Shell</span><span>curl</span></div>
+            <a href="https://github.com/dorlilmckenzie/devops-node-health-monitoring" target="_blank" rel="noopener" class="project-link">Explore repository <span>↗</span></a>
+          </div>
+        </article>
+
+        <article class="project-card project-two">
+          <div class="project-art art-cloud">
+            <div class="cloud-diagram">
+              <div class="cloud-node cloud-user"><span>◎</span><small>USER</small></div>
+              <div class="cloud-connector connector-one"></div>
+              <div class="cloud-node cloud-main"><span>☁</span><strong>AWS</strong><small>CLOUD</small></div>
+              <div class="cloud-connector connector-two"></div>
+              <div class="cloud-services">
+                <div><b>EC2</b><small>COMPUTE</small></div>
+                <div><b>S3</b><small>STORAGE</small></div>
+                <div><b>IAM</b><small>ACCESS</small></div>
+                <div><b>VPC</b><small>NETWORK</small></div>
+              </div>
+            </div>
+            <span class="art-decoration">02</span>
+          </div>
+          <div class="project-details">
+            <div class="project-meta"><span>CLOUD & INFRASTRUCTURE</span><span>PROJECT 02</span></div>
+            <h3>AWS Services<br>Architecture</h3>
+            <p>
+              An architecture exercise exploring how AWS services can
+              support compute, networking, storage, identity management,
+              monitoring and encryption requirements.
+            </p>
+            <div class="project-stack"><span>EC2</span><span>VPC</span><span>S3</span><span>IAM</span><span>CloudWatch</span></div>
+            <div class="project-link project-note">Architecture learning exercise · Not a live production deployment</div>
+          </div>
+        </article>
+
+        <article class="project-card project-three">
+          <div class="project-art art-luna">
+            <div class="luna-screen">
+              <div class="luna-top"><span>LUNA</span><span>✳</span></div>
+              <div class="luna-circle"><span>28</span><small>DAY CYCLE</small></div>
+              <div class="luna-bottom"><span>Track your cycle</span><span>♡</span></div>
+            </div>
+            <div class="luna-orbit luna-orbit-one"></div>
+            <div class="luna-orbit luna-orbit-two"></div>
+            <span class="art-decoration">03</span>
+          </div>
+          <div class="project-details">
+            <div class="project-meta"><span>CLOUD DEPLOYMENT</span><span>PROJECT 03</span></div>
+            <h3>Luna — Period<br>Tracking App</h3>
+            <p>
+              My period-tracking application, deployed to an AWS EC2
+              environment. My focus was on the application deployment
+              process and practical cloud hosting.
+            </p>
+            <div class="project-stack"><span>AWS EC2</span><span>GitHub</span><span>Docker</span></div>
+            <a href="https://github.com/dorlilmckenzie/luna-front-end" target="_blank" rel="noopener" class="project-link">Explore repository <span>↗</span></a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    
+    <!-- DEVOPS PROJECT DETAILS -->
+    <section class="content-section section-wrap devops-project-section" id="devops-deployment-project">
+      <div class="section-heading">
+        <span class="section-index">PROJECT / DEPLOYMENT</span>
+        <span class="section-line"></span>
+        <span class="section-note">PRACTICAL DEVOPS WORK</span>
+      </div>
+      <article class="project-card devops-feature-card">
+        <div class="project-card-content">
+          <span class="mini-label">DOCKER · NGINX · AWS EC2 · LINUX</span>
+          <h3>Portfolio Website Deployment</h3>
+          <p>Containerised this responsive portfolio website with Docker and Nginx, tested it locally, and prepared it for public hosting on an Ubuntu EC2 instance. The deployment workflow is being extended with GitHub Actions for automated updates.</p>
+          <div class="devops-stack"><span>Docker</span><span>Nginx</span><span>Ubuntu</span><span>AWS EC2</span><span>GitHub Actions</span></div>
+          <a href="https://github.com/dorlilmckenzie" target="_blank" rel="noopener noreferrer">Explore my GitHub <span>↗</span></a>
+        </div>
+      </article>
+    </section>
+<!-- JOURNEY -->
+    <section class="content-section section-wrap" id="journey">
+      <div class="section-heading">
+        <span class="section-index">04 / THE JOURNEY</span>
+        <span class="section-line"></span>
+        <span class="section-note">EDUCATION & EXPERIENCE</span>
+      </div>
+
+      <div class="journey-layout">
+        <div>
+          <h2>Still growing.<br><span class="text-accent">Always building.</span></h2>
+          <p class="journey-description">A journey shaped by curiosity, design and a growing passion for technology.</p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">2022</div>
+            <div class="timeline-content">
+              <h3>B.Sc. Biochemistry</h3>
+              <p>Rivers State University</p>
+              <span class="timeline-type">EDUCATION</span>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-date">PROFESSIONAL EXPERIENCE</div>
+            <div class="timeline-content">
+              <h3>Product & UI/UX Design</h3>
+              <p>
+                Worked on digital product experiences, user flows,
+                dashboards, prototypes and design handoff, including
+                logistics and software workflows.
+              </p>
+              <span class="timeline-type">PRODUCT DESIGN</span>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-dot timeline-dot-active"></span>
+            <div class="timeline-date">CURRENT FOCUS</div>
+            <div class="timeline-content">
+              <h3>DevOps & Cloud Engineering</h3>
+              <p>
+                Developing practical foundations in Linux, Bash, Git,
+                Docker, AWS and CI/CD through hands-on projects and
+                continuous learning.
+              </p>
+              <span class="timeline-type timeline-current">ONGOING LEARNING</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- CV DOWNLOAD -->
+    <section class="content-section section-wrap cv-download-section" id="cv-download">
+      <div class="section-heading">
+        <span class="section-index">05 / MY RESUME</span>
+        <span class="section-line"></span>
+        <span class="section-note">EXPERIENCE & QUALIFICATIONS</span>
+      </div>
+      <div class="cv-download-card">
+        <div><span class="mini-label">PROFESSIONAL PROFILE</span>
+          <h2>My experience, skills<br>and <span class="text-accent">career journey.</span></h2>
+          <p>View my professional background, product design experience, education and growing DevOps engineering skills.</p>
+        </div>
+        <div class="cv-download-action">
+          <span class="cv-file-type">PDF DOCUMENT · DORLIN STEPHEN-ODOGU</span>
+          <a class="btn btn-primary" href="assets/Dorlin_Stephen-Odogu_CV.pdf" download>Download my CV <span>↗</span></a>
+          <p class="cv-download-note">If the PDF is not available yet, download it from this chat and rerun the update script.</p>
+        </div>
+      </div>
+    </section>
+<!-- CONTACT -->
+    <section class="contact-section section-wrap" id="contact">
+      <div class="contact-card">
+        <span class="section-index">06 / START A CONVERSATION</span>
+        <div class="contact-content">
+          <p class="mini-label">GOOD THINGS START WITH A HELLO</p>
+          <h2>Let's build<br>something <span class="text-accent">meaningful.</span></h2>
+          <p>
+            Open to connecting with engineering teams, mentors,
+            recruiters and people passionate about technology.
+          </p>
+          <a href="mailto:dorlilmckenzie@gmail.com" class="btn btn-primary contact-button">Get in touch <span>↗</span></a>
+        </div>
+        <div class="contact-footer">
+          <a href="mailto:dorlilmckenzie@gmail.com">dorlilmckenzie@gmail.com</a>
+          <div>
+            <a href="https://github.com/dorlilmckenzie" target="_blank" rel="noopener">GITHUB ↗</a>
+            <a href="https://www.linkedin.com/in/dorlin-stephen-odogu/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
-  <footer>© <span id="year"></span> Dorlin Stephen-Odogu · Designed with intention. Built while learning.</footer>
+  <footer class="site-footer">
+    <a class="footer-logo" href="#home">D<span>.</span></a>
+    <p>© <span id="year"></span> DORLIN STEPHEN-ODOGU</p>
+    <a href="#home">BACK TO TOP ↑</a>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
