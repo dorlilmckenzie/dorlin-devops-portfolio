@@ -1,0 +1,99 @@
+name: Portfolio CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Validate, build and deploy
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      - name: Validate portfolio files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s site/index.html
+          test -s site/styles.css
+          test -s site/script.js
+          test -s site/assets/Dorlin_Stephen-Odogu_CV.pdf
+          test -s Dockerfile
+          test -s nginx/default.conf
+          test -x scripts/deploy.sh
+          echo "Required portfolio and deployment files are present."
+
+      - name: Build and deploy exact commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          ./scripts/deploy.sh "$GITHUB_SHA"
+
+  external-health-check:
+    name: Verify public website
+    runs-on: ubuntu-latest
+    needs: deploy
+    timeout-minutes: 5
+
+    steps:
+      - name: Check public website
+        run: |
+          set -euo pipefail
+          curl \
+            --fail \
+            --silent \
+            --show-error \
+            --retry 12 \
+            --retry-delay 5 \
+            --retry-connrefused \
+            --max-time 15 \
+            http://34.228.56.87/ \
+            -o /tmp/portfolio.html
+          grep -qi '<html' /tmp/portfolio.html
+          echo "Public website returned a successful HTML response."
+
+  rollback:
+    name: Roll back failed public deployment
+    runs-on: [self-hosted, Linux, X64]
+    needs: [deploy, external-health-check]
+    if: ${{ always() && needs.deploy.result == 'success' && needs.external-health-check.result == 'failure' }}
+
+    steps:
+      - name: Restore previous production container
+        run: |
+          set -euo pipefail
+          if sudo docker inspect dorlin-portfolio-previous >/dev/null 2>&1; then
+            sudo docker rm -f dorlin-portfolio >/dev/null 2>&1 || true
+            sudo docker rename dorlin-portfolio-previous dorlin-portfolio
+            sudo docker start dorlin-portfolio
+            curl --fail --silent --show-error --retry 10 --retry-delay 3 http://127.0.0.1/
+            echo "Previous production container restored."
+          else
+            echo "No previous container was available for rollback."
+            exit 1
+          fi
+
+  cleanup:
+    name: Finalize successful deployment
+    runs-on: [self-hosted, Linux, X64]
+    needs: [deploy, external-health-check]
+    if: ${{ success() }}
+
+    steps:
+      - name: Remove temporary rollback container
+        run: |
+          sudo docker rm -f dorlin-portfolio-previous >/dev/null 2>&1 || true
+          echo "Successful deployment finalized."
